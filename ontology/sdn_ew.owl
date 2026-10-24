@@ -1,0 +1,1381 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://www.urifia.univ-dschang.cm/dsac/sdn_ew.owl"
+         xmlns="http://www.urifia.univ-dschang.cm/dsac/sdn_ew.owl#"
+         xmlns:swrl="http://www.w3.org/2003/11/swrl#">
+
+<owl:Ontology rdf:about="http://www.urifia.univ-dschang.cm/dsac/sdn_ew.owl"/>
+
+<owl:ObjectProperty rdf:about="#issuedBy">
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="#SDNController"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#targetedAt">
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="#SDNController"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasContext">
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="#SecurityContext"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#triggersAnomaly">
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="#DetectedAnomaly"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#producesDecision">
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="#AccessDecision"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#locatedIn">
+  <rdfs:domain rdf:resource="#SDNController"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasPolicy">
+  <rdfs:domain rdf:resource="#SDNController"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#causedBy">
+  <rdfs:domain rdf:resource="#AccessDecision"/>
+  <rdfs:range rdf:resource="#DetectedAnomaly"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasTriggeringRule">
+  <rdfs:domain rdf:resource="#DetectedAnomaly"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#affectsService">
+  <rdfs:domain rdf:resource="#EWRequest"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#monitoredBy">
+  <rdfs:domain rdf:resource="#SDNController"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasJustifyingWindow">
+  <rdfs:domain rdf:resource="#SynchronizationRequest"/>
+  <rdfs:range rdf:resource="#LegitimeSyncWindow"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#operatesIn">
+  <rdfs:domain rdf:resource="#SDNController"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#hasTrustScore">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#SDNController"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#requestFrequency">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#SDNController"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#networkLoad">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#SecurityContext"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasSIEMAlert">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#SDNController"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#requestTimestamp">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasHour">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasUrgencyLevel">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasNoJustifyingEvent">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#TopologyUpdateRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hasNoTriggeringEvent">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#SynchronizationRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#elapsedSinceLastEvent">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#isInUnknownZone">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#SDNController"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#isCompromised">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#SDNController"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#isMalformed">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#isCriticalOperation">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#isReadOnlyOperation">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hTauTampered">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#EWRequest"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#SDNController">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TrustedController">
+  <rdfs:subClassOf rdf:resource="#SDNController"/>
+</owl:Class>
+
+<owl:Class rdf:about="#UntrustedController">
+  <rdfs:subClassOf rdf:resource="#SDNController"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CompromisedController">
+  <rdfs:subClassOf rdf:resource="#SDNController"/>
+</owl:Class>
+
+<owl:Class rdf:about="#EWRequest">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TopologyUpdateRequest">
+  <rdfs:subClassOf rdf:resource="#EWRequest"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SynchronizationRequest">
+  <rdfs:subClassOf rdf:resource="#EWRequest"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FlowRuleModificationRequest">
+  <rdfs:subClassOf rdf:resource="#EWRequest"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PolicyDistributionRequest">
+  <rdfs:subClassOf rdf:resource="#EWRequest"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SecurityContext">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LegitimeSyncWindow">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DetectedAnomaly">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TopologyPoisoningIndicator">
+  <rdfs:subClassOf rdf:resource="#DetectedAnomaly"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FalseSyncIndicator">
+  <rdfs:subClassOf rdf:resource="#DetectedAnomaly"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BehavioralSpoofingIndicator">
+  <rdfs:subClassOf rdf:resource="#DetectedAnomaly"/>
+</owl:Class>
+
+<owl:Class rdf:about="#HashMismatchIndicator">
+  <rdfs:subClassOf rdf:resource="#DetectedAnomaly"/>
+</owl:Class>
+
+<owl:Class rdf:about="#SIEMThreatIndicator">
+  <rdfs:subClassOf rdf:resource="#DetectedAnomaly"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AnomalousFrequency">
+  <rdfs:subClassOf rdf:resource="#DetectedAnomaly"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MaintenanceViolation">
+  <rdfs:subClassOf rdf:resource="#DetectedAnomaly"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AccessDecision">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<swrl:Variable rdf:about="urn:swrl#r"/>
+
+<swrl:Variable rdf:about="urn:swrl#c"/>
+
+<swrl:Variable rdf:about="urn:swrl#sc"/>
+
+<swrl:Variable rdf:about="urn:swrl#ctx"/>
+
+<swrl:Variable rdf:about="urn:swrl#l"/>
+
+<swrl:Variable rdf:about="urn:swrl#h"/>
+
+<swrl:Variable rdf:about="urn:swrl#u"/>
+
+<swrl:Variable rdf:about="urn:swrl#f"/>
+
+<swrl:Variable rdf:about="urn:swrl#e"/>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:DatavaluedPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#hTauTampered"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+            </swrl:DatavaluedPropertyAtom>
+          </rdf:first>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#HashMismatchIndicator"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#isInUnknownZone"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                  <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:DatavaluedPropertyAtom>
+                      <swrl:propertyPredicate rdf:resource="#requestFrequency"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                      <swrl:argument2 rdf:resource="urn:swrl#f"/>
+                    </swrl:DatavaluedPropertyAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:BuiltinAtom>
+                          <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                          <swrl:arguments>
+                            <rdf:Description>
+                              <rdf:first rdf:resource="urn:swrl#f"/>
+                              <rdf:rest>
+                                <rdf:Description>
+                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                  <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10.0</rdf:first>
+                                </rdf:Description>
+                              </rdf:rest>
+                            </rdf:Description>
+                          </swrl:arguments>
+                        </swrl:BuiltinAtom>
+                      </rdf:first>
+                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#BehavioralSpoofingIndicator"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#SynchronizationRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#hasNoTriggeringEvent"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                  <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:DatavaluedPropertyAtom>
+                      <swrl:propertyPredicate rdf:resource="#elapsedSinceLastEvent"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                      <swrl:argument2 rdf:resource="urn:swrl#e"/>
+                    </swrl:DatavaluedPropertyAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:BuiltinAtom>
+                          <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThan"/>
+                          <swrl:arguments>
+                            <rdf:Description>
+                              <rdf:first rdf:resource="urn:swrl#e"/>
+                              <rdf:rest>
+                                <rdf:Description>
+                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                  <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">120.0</rdf:first>
+                                </rdf:Description>
+                              </rdf:rest>
+                            </rdf:Description>
+                          </swrl:arguments>
+                        </swrl:BuiltinAtom>
+                      </rdf:first>
+                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#FalseSyncIndicator"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#TopologyUpdateRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#requestFrequency"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#f"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:BuiltinAtom>
+                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                      <swrl:arguments>
+                        <rdf:Description>
+                          <rdf:first rdf:resource="urn:swrl#f"/>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.0</rdf:first>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </swrl:arguments>
+                    </swrl:BuiltinAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:DatavaluedPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#hasNoJustifyingEvent"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                        </swrl:DatavaluedPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#TopologyPoisoningIndicator"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#requestFrequency"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#f"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:BuiltinAtom>
+                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                      <swrl:arguments>
+                        <rdf:Description>
+                          <rdf:first rdf:resource="urn:swrl#f"/>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">50.0</rdf:first>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </swrl:arguments>
+                    </swrl:BuiltinAtom>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#AnomalousFrequency"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#PolicyDistributionRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#hasTrustScore"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#sc"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:BuiltinAtom>
+                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                      <swrl:arguments>
+                        <rdf:Description>
+                          <rdf:first rdf:resource="urn:swrl#sc"/>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.65</rdf:first>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </swrl:arguments>
+                    </swrl:BuiltinAtom>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#TrustedController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:DatavaluedPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#hasHour"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#h"/>
+            </swrl:DatavaluedPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:BuiltinAtom>
+                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                  <swrl:arguments>
+                    <rdf:Description>
+                      <rdf:first rdf:resource="urn:swrl#h"/>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                          <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">22</rdf:first>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </swrl:arguments>
+                </swrl:BuiltinAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:DatavaluedPropertyAtom>
+                      <swrl:propertyPredicate rdf:resource="#isCriticalOperation"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                      <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                    </swrl:DatavaluedPropertyAtom>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:DatavaluedPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#isCriticalOperation"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+        </swrl:DatavaluedPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#SDNController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:DatavaluedPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#isInUnknownZone"/>
+              <swrl:argument1 rdf:resource="urn:swrl#c"/>
+              <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+            </swrl:DatavaluedPropertyAtom>
+          </rdf:first>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#UntrustedController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:DatavaluedPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#hasUrgencyLevel"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#u"/>
+            </swrl:DatavaluedPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:BuiltinAtom>
+                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                  <swrl:arguments>
+                    <rdf:Description>
+                      <rdf:first rdf:resource="urn:swrl#u"/>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                          <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.8</rdf:first>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </swrl:arguments>
+                </swrl:BuiltinAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:IndividualPropertyAtom>
+                      <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                      <swrl:argument2 rdf:resource="urn:swrl#c"/>
+                    </swrl:IndividualPropertyAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:DatavaluedPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#hasTrustScore"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                          <swrl:argument2 rdf:resource="urn:swrl#sc"/>
+                        </swrl:DatavaluedPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:first>
+                            <swrl:BuiltinAtom>
+                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                              <swrl:arguments>
+                                <rdf:Description>
+                                  <rdf:first rdf:resource="urn:swrl#sc"/>
+                                  <rdf:rest>
+                                    <rdf:Description>
+                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                      <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.7</rdf:first>
+                                    </rdf:Description>
+                                  </rdf:rest>
+                                </rdf:Description>
+                              </swrl:arguments>
+                            </swrl:BuiltinAtom>
+                          </rdf:first>
+                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#TrustedController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#hasTrustScore"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#sc"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:BuiltinAtom>
+                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                      <swrl:arguments>
+                        <rdf:Description>
+                          <rdf:first rdf:resource="urn:swrl#sc"/>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.5</rdf:first>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </swrl:arguments>
+                    </swrl:BuiltinAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:DatavaluedPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#isReadOnlyOperation"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                        </swrl:DatavaluedPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#TrustedController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#hasTrustScore"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#sc"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:BuiltinAtom>
+                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                      <swrl:arguments>
+                        <rdf:Description>
+                          <rdf:first rdf:resource="urn:swrl#sc"/>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.6</rdf:first>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </swrl:arguments>
+                    </swrl:BuiltinAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:DatavaluedPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#hasHour"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                          <swrl:argument2 rdf:resource="urn:swrl#h"/>
+                        </swrl:DatavaluedPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:first>
+                            <swrl:BuiltinAtom>
+                              <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                              <swrl:arguments>
+                                <rdf:Description>
+                                  <rdf:first rdf:resource="urn:swrl#h"/>
+                                  <rdf:rest>
+                                    <rdf:Description>
+                                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                      <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">8</rdf:first>
+                                    </rdf:Description>
+                                  </rdf:rest>
+                                </rdf:Description>
+                              </swrl:arguments>
+                            </swrl:BuiltinAtom>
+                          </rdf:first>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:first>
+                                <swrl:BuiltinAtom>
+                                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThan"/>
+                                  <swrl:arguments>
+                                    <rdf:Description>
+                                      <rdf:first rdf:resource="urn:swrl#h"/>
+                                      <rdf:rest>
+                                        <rdf:Description>
+                                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                          <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">18</rdf:first>
+                                        </rdf:Description>
+                                      </rdf:rest>
+                                    </rdf:Description>
+                                  </swrl:arguments>
+                                </swrl:BuiltinAtom>
+                              </rdf:first>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#TrustedController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#SDNController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:DatavaluedPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#isCompromised"/>
+              <swrl:argument1 rdf:resource="urn:swrl#c"/>
+              <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+            </swrl:DatavaluedPropertyAtom>
+          </rdf:first>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#CompromisedController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#hasContext"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#ctx"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#networkLoad"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#ctx"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#l"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:BuiltinAtom>
+                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                      <swrl:arguments>
+                        <rdf:Description>
+                          <rdf:first rdf:resource="urn:swrl#l"/>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">85.0</rdf:first>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </swrl:arguments>
+                    </swrl:BuiltinAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:DatavaluedPropertyAtom>
+                          <swrl:propertyPredicate rdf:resource="#isCriticalOperation"/>
+                          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                        </swrl:DatavaluedPropertyAtom>
+                      </rdf:first>
+                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:DatavaluedPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#isCriticalOperation"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+        </swrl:DatavaluedPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#hasTrustScore"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#sc"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:BuiltinAtom>
+                      <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#lessThan"/>
+                      <swrl:arguments>
+                        <rdf:Description>
+                          <rdf:first rdf:resource="urn:swrl#sc"/>
+                          <rdf:rest>
+                            <rdf:Description>
+                              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                              <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.4</rdf:first>
+                            </rdf:Description>
+                          </rdf:rest>
+                        </rdf:Description>
+                      </swrl:arguments>
+                    </swrl:BuiltinAtom>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#UntrustedController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#isCompromised"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                  <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#CompromisedController"/>
+          <swrl:argument1 rdf:resource="urn:swrl#c"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#issuedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:resource="urn:swrl#c"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#hasSIEMAlert"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#c"/>
+                  <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#SIEMThreatIndicator"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#EWRequest"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:DatavaluedPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#isMalformed"/>
+              <swrl:argument1 rdf:resource="urn:swrl#r"/>
+              <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+            </swrl:DatavaluedPropertyAtom>
+          </rdf:first>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:DatavaluedPropertyAtom>
+          <swrl:propertyPredicate rdf:resource="#isMalformed"/>
+          <swrl:argument1 rdf:resource="urn:swrl#r"/>
+          <swrl:argument2 rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrl:argument2>
+        </swrl:DatavaluedPropertyAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+
+</rdf:RDF>

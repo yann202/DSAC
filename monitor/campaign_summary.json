@@ -1,0 +1,22 @@
+{
+  "n": 2000,
+  "tp": 752,
+  "tn": 1148,
+  "fp": 48,
+  "fn": 52,
+  "precision_pct": 94.0,
+  "detection_pct": 93.5,
+  "f1_pct": 93.8,
+  "accuracy_pct": 95.0,
+  "fp_rate_pct": 4.0,
+  "auc": 0.995,
+  "per_attack": {
+    "MITM": 98.1,
+    "SPOOFING": 87.1,
+    "TOPOLOGY_POISONING": 88.3,
+    "FALSE_SYNC": 100.0
+  },
+  "p99_ms": 634.5,
+  "precision_50runs_pct": 94.6,
+  "generated_at": "2026-06-25T13:28:49"
+}

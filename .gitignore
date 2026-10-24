@@ -1,0 +1,42 @@
+# Environnement et caches
+dsac-env/
+__pycache__/
+*.pyc
+.dsac_root
+
+# Logs et bases de données
+logs/
+*.log
+*.db
+ledger/*.db
+
+# Archives et livrables volumineux
+*.zip
+*.tar.gz
+livrable_encadreur/
+
+# Secrets : clés et certificats (NE JAMAIS publier)
+*.pem
+*.key
+*.crt
+*.p12
+certs/
+
+# Fichiers parasites
+0
+0.6
+text_monitor.pyQ
+
+# Dump Redis et sauvegardes
+dump.rdb
+*.rdb
+*.bak
+*.old.html
+*.old2.html
+
+# Dump Redis et sauvegardes
+dump.rdb
+*.rdb
+*.bak
+*.old.html
+*.old2.html
