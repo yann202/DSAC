@@ -71,10 +71,10 @@ def rules(e, action, sc):
     if e["is_malformed"]:           return ["R0-MALFORMED"]
     if e["h_tau_tampered"]:         return ["R_MITM-HASH"]
     if e["siem_alert"]:             return ["R1-SIEM"]
-    if e["is_compromised"]:         return ["R6-COMPROMISED"]
-    if e["trust_score"] < 0.4:      return ["R3-LOW-TRUST"]
+    if e["is_compromised"]:         return ["R5-COMPROMISED"]
+    if e["trust_score"] < 0.4:      return ["R2-LOW-TRUST"]
     if e["network_load_pct"]>LOAD_CRIT and e["is_critical"]:
-        return ["R5-OVERLOAD"]
+        return ["R4-OVERLOAD"]
     if e["zone"]=="UNKNOWN" and e["update_freq_60s"]>10:
         return ["R_B3-SPOOFING"]
     if ("topology" in action.lower()
@@ -86,12 +86,12 @@ def rules(e, action, sc):
             and e["elapsed_since_event_s"]<SYNC_WINDOW):
         return ["R_B2-FALSE-SYNC"]
     if e["urgency"]>=0.8 and e["trust_score"]>=0.7:
-        return ["R9-URGENT"]
+        return ["R8-URGENT"]
     if e["is_readonly"] and e["trust_score"]>=0.5:
-        return ["R8-READONLY"]
+        return ["R7-READONLY"]
     if 8<=e["hour"]<=18 and sc>=TRUST_THRESH:
-        return ["R7-BUSINESS-HOURS"]
-    return ["R0-DEFAULT-DENY"]
+        return ["R6-BUSINESS-HOURS"]
+    return ["R_DEF-DEFAULT-DENY"]
 
 
 def verdict_from_rules(r_list):

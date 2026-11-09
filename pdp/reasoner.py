@@ -55,6 +55,16 @@ def _compute_score(env: dict) -> float:
 def _eval_rules(env: dict, score: float, action: str) -> tuple:
     """
     Evaluation directe des 18 regles SWRL.
+    Correspondance des identifiants avec le Tableau 3 de l'article :
+      R0 syntaxique | R1 alerte SIEM | R2 confiance < 0.4 | R3 MaintenanceViolation
+      (prevue dans la conception, non implementee) | R4 charge > 85 % + operation
+      critique | R5 expediteur compromis | R6 PERMIT heures ouvrees (S(tau) >= 0.6)
+      | R7 PERMIT lecture seule | R8 PERMIT urgence | R9 UntrustedController infere
+      (regle OWL r10, zone inconnue ; non evaluee separement ici) | R10 operation
+      critique apres 22 h | R11 PERMIT distribution de politique | R12 frequence
+      globale > 50/min | R_B1, R_B2, R_B3, R_MITM comportementales | R_DEF refus
+      par defaut. Les anciens identifiants (R0_DEFAULT, R3, R5, R6, R7, R8, R9,
+      R11, R13, R14) apparaissent dans les journaux anterieurs a cette version.
     Ordre strict : Syntaxiques -> DENY -> PERMIT -> Default DENY.
     Retourne (verdict, rule_id, justification).
     """
@@ -71,24 +81,24 @@ def _eval_rules(env: dict, score: float, action: str) -> tuple:
         return "DENY", "R1", "Alerte SIEM active sur le controleur emetteur -> SIEMThreatIndicator."
 
     if env.get("is_compromised", False):
-        return "DENY", "R6", "Controleur marque CompromisedController (incoherence Ledger detectee)."
+        return "DENY", "R5", "Controleur marque CompromisedController (incoherence Ledger detectee)."
 
     if env.get("trust_score", 1.0) < 0.4:
-        return "DENY", "R3", f"Score de confiance {env.get('trust_score'):.3f} < seuil critique 0.4 -> UntrustedController."
+        return "DENY", "R2", f"Score de confiance {env.get('trust_score'):.3f} < seuil critique 0.4 -> UntrustedController."
 
     load = env.get("network_load_pct", 50.0)
     if load > LOAD_CRIT and env.get("is_critical", False):
-        return "DENY", "R5", f"Charge {load}% > seuil critique {LOAD_CRIT}% + operation critique (Benamrane 2017)."
+        return "DENY", "R4", f"Charge {load}% > seuil critique {LOAD_CRIT}% + operation critique (Benamrane 2017)."
 
     h = env.get("hour", 12)
     if h > 22 and env.get("is_critical", False):
-        return "DENY", "R11", f"Operation critique hors heures autorisees (heure={h}h > 22h)."
+        return "DENY", "R10", f"Operation critique hors heures autorisees (heure={h}h > 22h)."
 
     if env.get("zone", "DC1") == "UNKNOWN" and env.get("update_freq_60s", 1) > 10:
         return "DENY", "R_B3", "Zone inconnue + frequence anormale > 10/min -> BehavioralSpoofingIndicator (Alrashede 2025b §4.2)."
 
     if env.get("update_freq_60s", 1) > 50:
-        return "DENY", "R14", f"Frequence globale {env.get('update_freq_60s')}/min > 50 -> AnomalousFrequency."
+        return "DENY", "R12", f"Frequence globale {env.get('update_freq_60s')}/min > 50 -> AnomalousFrequency."
 
     # ── Categorie 3 : Comportementales DENY ──────────────────
     # R_B1 : Topology Poisoning (Cai 2021 Marionette / Skowyra 2018)
@@ -116,19 +126,19 @@ def _eval_rules(env: dict, score: float, action: str) -> tuple:
     trust   = env.get("trust_score", 0.75)
 
     if urgency >= 0.8 and trust >= 0.7:
-        return "PERMIT", "R9", f"Urgence {urgency:.2f} >= 0.8 + confiance {trust:.3f} >= 0.7 -> PERMIT."
+        return "PERMIT", "R8", f"Urgence {urgency:.2f} >= 0.8 + confiance {trust:.3f} >= 0.7 -> PERMIT."
 
     if env.get("is_readonly", False) and trust >= 0.5:
-        return "PERMIT", "R8", f"Operation lecture seule + confiance {trust:.3f} >= 0.5 -> PERMIT."
+        return "PERMIT", "R7", f"Operation lecture seule + confiance {trust:.3f} >= 0.5 -> PERMIT."
 
     if "policy" in action.lower() and trust >= 0.65:
-        return "PERMIT", "R13", f"PolicyDistribution + confiance {trust:.3f} >= 0.65 -> PERMIT."
+        return "PERMIT", "R11", f"PolicyDistribution + confiance {trust:.3f} >= 0.65 -> PERMIT."
 
     if 8 <= h <= 18 and score >= TRUST_THRESH:
-        return "PERMIT", "R7", f"Heure ouvrée ({h}h) + S(tau)={score:.4f} >= {TRUST_THRESH} -> PERMIT."
+        return "PERMIT", "R6", f"Heure ouvrée ({h}h) + S(tau)={score:.4f} >= {TRUST_THRESH} -> PERMIT."
 
     # ── Default Deny ──────────────────────────────────────────
-    return ("DENY", "R0_DEFAULT",
+    return ("DENY", "R_DEF",
             f"Aucune regle PERMIT satisfaite. S(tau)={score:.4f} < seuil={TRUST_THRESH}. Default Deny applique.")
 
 
@@ -204,8 +214,8 @@ def _eval_with_pellet(env: dict, action: str, onto) -> tuple:
                 "BehavioralSpoofingIndicator":"R_B3",
                 "HashMismatchIndicator":      "R_MITM",
                 "SIEMThreatIndicator":        "R1",
-                "AnomalousFrequency":         "R14",
-                "MaintenanceViolation":       "R4",
+                "AnomalousFrequency":         "R12",
+                "MaintenanceViolation":       "R3",
             }
             for anom, rule_id in anomaly_map.items():
                 if anom in req_types:
@@ -213,15 +223,15 @@ def _eval_with_pellet(env: dict, action: str, onto) -> tuple:
                             f"Pellet a infere {anom} via {rule_id}.")
 
             if "CompromisedController" in ctrl_types:
-                return ("DENY", "PELLET:R6:CompromisedController",
+                return ("DENY", "PELLET:R5:CompromisedController",
                         "Pellet a infere CompromisedController.")
 
             if "UntrustedController" in ctrl_types:
-                return ("DENY", "PELLET:R3/R10:UntrustedController",
+                return ("DENY", "PELLET:R2/R9:UntrustedController",
                         "Pellet a infere UntrustedController.")
 
             if "TrustedController" in ctrl_types:
-                return ("PERMIT", "PELLET:R7/R8/R9:TrustedController",
+                return ("PERMIT", "PELLET:R6/R7/R8/R11:TrustedController",
                         "Pellet a infere TrustedController.")
 
             return None, None, None

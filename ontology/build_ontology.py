@@ -104,6 +104,7 @@ with onto:
         domain = [EWRequest]; range = [bool]
 
     # REGLES SWRL - Categorie 1 : Syntaxiques
+    # Tableau 3 de l'article : R0
     r0 = Imp()
     r0.set_as_rule(
         "EWRequest(?r), isMalformed(?r, true)"
@@ -111,22 +112,26 @@ with onto:
     )
 
     # REGLES SWRL - Categorie 2 : Contextuelles
+    # Tableau 3 de l'article : R1
     r1 = Imp()
     r1.set_as_rule(
         "EWRequest(?r), issuedBy(?r, ?c), hasSIEMAlert(?c, true)"
         " -> SIEMThreatIndicator(?r)"
     )
+    # Tableau 3 de l'article : R5 (forme EWRequest ; meme concept que r6)
     r2 = Imp()
     r2.set_as_rule(
         "EWRequest(?r), issuedBy(?r, ?c), isCompromised(?c, true)"
         " -> CompromisedController(?c)"
     )
+    # Tableau 3 de l'article : R2
     r3 = Imp()
     r3.set_as_rule(
         "EWRequest(?r), issuedBy(?r, ?c),"
         " hasTrustScore(?c, ?sc), lessThan(?sc, 0.4)"
         " -> UntrustedController(?c)"
     )
+    # Tableau 3 de l'article : R4
     r5 = Imp()
     r5.set_as_rule(
         "EWRequest(?r), hasContext(?r, ?ctx),"
@@ -134,11 +139,13 @@ with onto:
         " isCriticalOperation(?r, true)"
         " -> isCriticalOperation(?r, true)"
     )
+    # Tableau 3 de l'article : R5
     r6 = Imp()
     r6.set_as_rule(
         "SDNController(?c), isCompromised(?c, true)"
         " -> CompromisedController(?c)"
     )
+    # Tableau 3 de l'article : R6
     r7 = Imp()
     r7.set_as_rule(
         "EWRequest(?r), issuedBy(?r, ?c),"
@@ -147,6 +154,7 @@ with onto:
         " greaterThan(?h, 8), lessThan(?h, 18)"
         " -> TrustedController(?c)"
     )
+    # Tableau 3 de l'article : R7
     r8 = Imp()
     r8.set_as_rule(
         "EWRequest(?r), issuedBy(?r, ?c),"
@@ -154,6 +162,7 @@ with onto:
         " isReadOnlyOperation(?r, true)"
         " -> TrustedController(?c)"
     )
+    # Tableau 3 de l'article : R8
     r9 = Imp()
     r9.set_as_rule(
         "EWRequest(?r), hasUrgencyLevel(?r, ?u),"
@@ -162,11 +171,13 @@ with onto:
         " hasTrustScore(?c, ?sc), greaterThan(?sc, 0.7)"
         " -> TrustedController(?c)"
     )
+    # Tableau 3 de l'article : R9
     r10 = Imp()
     r10.set_as_rule(
         "SDNController(?c), isInUnknownZone(?c, true)"
         " -> UntrustedController(?c)"
     )
+    # Tableau 3 de l'article : R10
     r11 = Imp()
     r11.set_as_rule(
         "EWRequest(?r), hasHour(?r, ?h),"
@@ -174,12 +185,14 @@ with onto:
         " isCriticalOperation(?r, true)"
         " -> isCriticalOperation(?r, true)"
     )
+    # Tableau 3 de l'article : R11
     r13 = Imp()
     r13.set_as_rule(
         "PolicyDistributionRequest(?r), issuedBy(?r, ?c),"
         " hasTrustScore(?c, ?sc), greaterThan(?sc, 0.65)"
         " -> TrustedController(?c)"
     )
+    # Tableau 3 de l'article : R12
     r14 = Imp()
     r14.set_as_rule(
         "EWRequest(?r), issuedBy(?r, ?c),"
@@ -188,6 +201,7 @@ with onto:
     )
 
     # REGLES SWRL - Categorie 3 : Comportementales
+    # Tableau 3 de l'article : R_B1
     r_b1 = Imp()
     r_b1.set_as_rule(
         "TopologyUpdateRequest(?r), issuedBy(?r, ?c),"
@@ -195,6 +209,7 @@ with onto:
         " hasNoJustifyingEvent(?r, true)"
         " -> TopologyPoisoningIndicator(?r)"
     )
+    # Tableau 3 de l'article : R_B2
     r_b2 = Imp()
     r_b2.set_as_rule(
         "SynchronizationRequest(?r), issuedBy(?r, ?c),"
@@ -202,6 +217,7 @@ with onto:
         " elapsedSinceLastEvent(?r, ?e), lessThan(?e, 120.0)"
         " -> FalseSyncIndicator(?r)"
     )
+    # Tableau 3 de l'article : R_B3
     r_b3 = Imp()
     r_b3.set_as_rule(
         "EWRequest(?r), issuedBy(?r, ?c),"
@@ -209,6 +225,7 @@ with onto:
         " requestFrequency(?c, ?f), greaterThan(?f, 10.0)"
         " -> BehavioralSpoofingIndicator(?r)"
     )
+    # Tableau 3 de l'article : R_MITM
     r_mitm = Imp()
     r_mitm.set_as_rule(
         "EWRequest(?r), hTauTampered(?r, true)"

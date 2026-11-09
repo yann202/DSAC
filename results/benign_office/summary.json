@@ -1,0 +1,53 @@
+{
+  "n_requests": 10000,
+  "n_refused": 0,
+  "fpr_percent": 0.0,
+  "ci95_wilson_percent": [
+    0.0,
+    0.038
+  ],
+  "reference_synthetic_fpr_percent": 4.0,
+  "reference_inside_ci": false,
+  "n_runs": 1,
+  "per_run_fpr_percent": [
+    0.0
+  ],
+  "per_run_mean": 0.0,
+  "per_run_std": null,
+  "refused_by_rule": {},
+  "fpr_by_operation_percent": {
+    "flow_rule": 0.0,
+    "inventory_read": 0.0,
+    "policy_push": 0.0,
+    "sync_state_read": 0.0,
+    "synchronisation": 0.0,
+    "topology_read": 0.0,
+    "topology_update": 0.0
+  },
+  "fpr_read_percent": 0.0,
+  "fpr_write_percent": 0.0,
+  "office_hours_utc_8_18": {
+    "n": 10000,
+    "refused": 0,
+    "fpr_percent": 0.0,
+    "ci95": [
+      0.0,
+      0.038
+    ]
+  },
+  "utc_hours_covered": [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "client_latency_ms_end_to_end": {
+    "p50": 74.12,
+    "p95": 117.72,
+    "p99": 165.87
+  }
+}

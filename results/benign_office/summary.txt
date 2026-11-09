@@ -1,0 +1,1 @@
+Over 10000 legitimate requests (1 run(s)), DSAC refused 0, a false-positive rate of 0.00% (95% Wilson interval 0.00 to 0.04%). This differs from the 4.0% measured on the synthetic corpus.
