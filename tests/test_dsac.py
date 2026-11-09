@@ -6,7 +6,9 @@ Auteur : NECDEM Wilfried — Univ. Dschang — URIFIA — 2026
 import json, time, random, requests, statistics, csv, redis
 
 PROXY_URL   = "http://localhost:8000"
-DATASET     = "/home/wilf/dsac/dataset/dsac_dataset_10k.json"
+import os
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATASET     = os.path.join(ROOT, "dataset", "dsac_dataset_10k.json")
 N_RUNS      = 50
 REQ_PER_RUN = 200
 random.seed(42)
@@ -112,7 +114,7 @@ print(f"Faux positifs   : {total_fp/total_r*100:.1f}%")
 print(f"Detection atk   : {total_tp}/{total_atk} ({total_tp/total_atk*100:.1f}%)")
 print("="*60)
 
-with open("/home/wilf/dsac/tests/resultats_50runs.csv","w",newline="") as f:
+with open(os.path.join(ROOT, "tests", "resultats_50runs.csv"),"w",newline="") as f:
     w = csv.writer(f)
     w.writerow(["run","p99_ms","precision_pct"])
     for i,(p,pr) in enumerate(zip(run_p99s,run_precs),1):

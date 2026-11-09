@@ -6,15 +6,12 @@ echo -e "${B}[1] Prerequis...${N}"; manque=0
 check(){ if command -v "$1" >/dev/null 2>&1; then echo -e "   ${V}OK${N}  $2";
   else echo -e "   ${R}ABSENT${N}  $2 — $3"; manque=1; fi; }
 check python3 "Python 3"       "sudo apt install python3 python3-venv"
+python3 -c 'import sys; sys.exit(0 if sys.version_info >= (3, 11) else 1)' || { echo -e "   ${R}Python 3.11 ou plus requis${N} (voir README)"; exit 1; }
 check java    "Java (OpenJDK)" "sudo apt install openjdk-21-jre"
 check docker  "Docker"         "https://docs.docker.com/engine/install/ubuntu/"
 check redis-cli "Redis"        "sudo apt install redis-server"
 [ "$manque" = "1" ] && { echo -e "\n${R}Installe les prerequis puis relance.${N}"; exit 1; }
 docker info >/dev/null 2>&1 || { echo -e "${R}Docker non demarre : sudo systemctl start docker${N}"; exit 1; }
-if [ "$PROJET" != "/home/wilf/dsac" ] && [ ! -e /home/wilf/dsac ]; then
-  echo -e "${J}[2] Lien /home/wilf/dsac -> projet (sudo)...${N}"
-  sudo mkdir -p /home/wilf && sudo ln -s "$PROJET" /home/wilf/dsac && echo -e "   ${V}OK${N}"
-fi
 echo -e "${B}[3] Environnement Python...${N}"; cd "$PROJET"
 [ -d "$HOME/dsac-env" ] || python3 -m venv "$HOME/dsac-env"
 source "$HOME/dsac-env/bin/activate"; pip install -q --upgrade pip

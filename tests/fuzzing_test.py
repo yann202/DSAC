@@ -15,7 +15,8 @@ from collections import Counter
 
 PROXY    = "http://localhost:8000"
 ENDPOINT = "/restconf/operational/network-topology:network-topology"
-OUTDIR   = "/home/wilf/dsac/monitor/graphs"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTDIR   = os.path.join(ROOT, "monitor", "graphs")
 os.makedirs(OUTDIR, exist_ok=True)
 
 C_NAVY="#163664"; C_CYAN="#0091af"; C_RED="#b92323"; C_GREEN="#196e3c"

@@ -14,8 +14,9 @@ from datetime import datetime as _dt
 
 PROXY    = "http://localhost:8000"
 ENDPOINT = "/restconf/operational/network-topology:network-topology"
-DATASET  = "/home/wilf/dsac/dataset/dsac_dataset_10k.json"
-OUTDIR   = "/home/wilf/dsac/monitor/graphs"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATASET  = os.path.join(ROOT, "dataset", "dsac_dataset_10k.json")
+OUTDIR   = os.path.join(ROOT, "monitor", "graphs")
 os.makedirs(OUTDIR, exist_ok=True)
 
 C_NAVY="#163664"; C_CYAN="#0091af"; C_RED="#b92323"
@@ -140,7 +141,7 @@ roc_auc = auc(fpr, tpr)
 m_vals = [precision*100, recall*100, f1*100, accuracy*100]
 
 # Convergence (si csv present)
-res_file = "/home/wilf/dsac/tests/resultats_50runs.csv"
+res_file = os.path.join(ROOT, "tests", "resultats_50runs.csv")
 has_conv = os.path.exists(res_file)
 if has_conv:
     import csv as _csv
